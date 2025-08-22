@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const submit = async (e) => {
@@ -16,7 +17,12 @@ export default function Signup() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-    if (res.ok) router.push("/login"); else alert((await res.json()).error);
+    if (res.ok) {
+      router.push("/login");
+    } else {
+      const data = await res.json();
+      setError(data.error);
+    }
   };
 
   return (
@@ -30,6 +36,12 @@ export default function Signup() {
             Join us and start exploring
           </p>
         </div>
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
 
         <form className="mt-8 space-y-6" onSubmit={submit}>
           <div className="rounded-md shadow-sm space-y-4">

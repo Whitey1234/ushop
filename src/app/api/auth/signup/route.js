@@ -13,7 +13,9 @@ export async function POST(req) {
     }
 
     const db = await clientPromise;
+    console.log("Checking for user with email:", email);
     const exists = await db.collection("users").findOne({ email });
+    console.log("User exists?", exists);
 
     if (exists) {
       return NextResponse.json({ error: "User already exists" }, { status: 409 });
