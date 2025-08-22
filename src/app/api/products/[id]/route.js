@@ -3,6 +3,32 @@ import { NextResponse } from "next/server";
 import { ObjectId } from 'mongodb';
 import clientPromise from "@/lib/mongodb";
 
+export async function GET(request, { params }) {
+  try {
+    const { id } = params;
+
+    if (!id) {
+      return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
+    }
+
+    const db = await clientPromise;
+    const product = await db.collection("products").findOne({ _id: new ObjectId(id) });
+
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(product);
+
+  } catch (error) {
+    console.error("Fetch Product API error:", error);
+    if (error.name === 'BSONError') {
+        return NextResponse.json({ error: "Invalid Product ID format" }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
 export async function DELETE(request, { params }) {
   try {
     const { id } = params;
