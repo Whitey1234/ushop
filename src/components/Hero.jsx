@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+
 export default function Hero() {
   return (
     <div className="relative bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
@@ -49,7 +50,7 @@ export default function Hero() {
         <div className="md:w-1/2 relative">
           <div className="w-full h-[400px] relative">
             <Image
-              src="/hero-image.jpg" 
+              src="/banneri-img.jpg" 
               alt="Shopping Experience"
               fill
               className="object-cover rounded-2xl shadow-xl"
