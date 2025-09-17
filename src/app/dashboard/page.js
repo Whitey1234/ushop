@@ -9,10 +9,10 @@ export default function DashboardPage() {
   const router = useRouter();
 
   // Protect the route
-  if (status === "unauthenticated") {
-    router.push("/login");
-    return null; // Render nothing while redirecting
-  }
+  // if (status === "unauthenticated") {
+  //   router.push("/login");
+  //   return null; // Render nothing while redirecting
+  // }
   
   // Show a loading state while session is being checked
   if (status === "loading") {
