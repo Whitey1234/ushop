@@ -22,7 +22,7 @@ export async function POST(req) {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    await db.collection("users").insertOne({ name, email, passwordHash, createdAt: new Date() });
+    await db.collection("users").insertOne({ name, email, passwordHash, createdAt: new Date(),role:"user", });
 
     return NextResponse.json({ message: "User created" }, { status: 201 });
   } catch (error) {

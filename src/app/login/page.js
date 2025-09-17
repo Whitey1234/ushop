@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaEnvelope, FaGoogle, FaHornbill, FaLock } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -37,6 +37,14 @@ export default function Login() {
             Please sign in to your account
           </p>
         </div>
+         <button
+                onClick={() => signIn("google",{callbackUrl:"/"})}
+                className="flex items-center gap-2 border-2 border-blue-500 p-2 rounded-2xl w-full hover:bg-blue-600 hover:text-white transition-colors duration-100"
+              >
+                <FaGoogle className="text-blue-400" size={20} />
+                Sign in with Google
+              </button>
+      <p className="text-center text-blue-700 flex justify-center items-center gap-0.5 text-2xl"><FaHornbill /> or</p>
         
         <form className="mt-8 space-y-6" onSubmit={submit}>
           <div className="rounded-md shadow-sm space-y-4">

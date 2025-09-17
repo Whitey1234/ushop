@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock, FaGoogle, FaOrcid, FaHornbill } from 'react-icons/fa';
 import Link from 'next/link';
+import { signIn } from "next-auth/react";
 
 export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -38,11 +39,18 @@ export default function Signup() {
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 pt-3 rounde relative" role="alert">
             <span className="block sm:inline">{error}</span>
           </div>
         )}
-
+          <button
+        onClick={() => signIn("google",{callbackUrl:"/"})}
+        className="flex items-center gap-2 border-2 border-blue-500 p-2 rounded-2xl w-full hover:bg-blue-600 hover:text-white transition-colors duration-100"
+      >
+        <FaGoogle className="text-blue-400" size={20} />
+        Sign in with Google
+      </button>
+      <p className="text-center text-blue-700 flex justify-center items-center gap-0.5 text-2xl"><FaHornbill /> or</p>
         <form className="mt-8 space-y-6" onSubmit={submit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div className="relative">
@@ -80,6 +88,7 @@ export default function Signup() {
               />
             </div>
           </div>
+         
 
           <button
             type="submit"
@@ -95,6 +104,7 @@ export default function Signup() {
             </Link>
           </p>
         </form>
+        
       </div>
     </div>
   );

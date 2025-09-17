@@ -4,8 +4,11 @@ const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || "scic-nextjs-project";
 const options = {};
 
+// console.log("Connecting to MongoDB with URI:", uri);
+// console.log("Using database name:", dbName);
+
 let client;
-let clientPromise;
+let clientPromise; 
 
 if (!process.env.MONGODB_URI) {
   throw new Error("Please add your MongoDB URI to .env.local");

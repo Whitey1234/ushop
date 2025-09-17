@@ -17,7 +17,7 @@ export async function GET() {
 // POST handler to add a new product
 export async function POST(req) {
   try {
-    const { name, description, price, imageUrl } = await req.json();
+    const { name, description, price, imageUrl,user_email } = await req.json();
 
     if (!name || !description || !price || !imageUrl) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -30,6 +30,7 @@ export async function POST(req) {
       price: parseFloat(price), // Ensure price is a number
       imageUrl,
       createdAt: new Date(),
+      user_email,
     });
 
     return NextResponse.json({ message: "Product added successfully", productId: result.insertedId }, { status: 201 });

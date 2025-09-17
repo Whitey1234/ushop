@@ -14,6 +14,7 @@ export default function AddProductPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  
 
   // Protect the route
   if (status === "unauthenticated") {
@@ -30,6 +31,7 @@ export default function AddProductPage() {
       setError("All fields are required.");
       return;
     }
+    const user_email = session?.user?.email;
 
     try {
       const res = await fetch("/api/products", {
@@ -37,7 +39,7 @@ export default function AddProductPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, description, price, imageUrl }),
+        body: JSON.stringify({ name, description, price, imageUrl,user_email }),
       });
 
       if (res.ok) {
