@@ -14,15 +14,13 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     const result = await signIn("credentials", {
-      redirect: false,
       email,
       password,
+      callbackUrl: "/",
     });
 
     if (result.error) {
       setError(result.error);
-    } else {
-      window.location.href = "/";
     }
   };
 
